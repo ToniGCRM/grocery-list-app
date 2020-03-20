@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Container, Header, } from 'semantic-ui-react';
-import Items from "./components/items/Items";
+import List from "./components/lists/List";
+import ItemForm from "./components/ItemForm";
 
 class App extends Component {
 
@@ -13,11 +14,24 @@ class App extends Component {
     ],
   }
 
+  getId = () => {
+    return Math.floor((1+Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1);
+  };
+
+  addItems = (itemsData) => {
+    let items = { id:this.getId(), ...itemsData, };
+    this.setState({ items: [items, ...this.state.items], });
+  }
+
   render() {
     return (
-      <Container>
+      <Container style={{ paddingTop: "20px" }}>
         <Header as="h1">Toni's Amazing Grocery List App</Header>
-        <Items items={this.state.items} />
+        <br/>
+        <ItemForm add={this.addItems} />
+        <List items={this.state.items} />
       </Container>
     );
   }
