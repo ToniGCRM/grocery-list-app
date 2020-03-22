@@ -14,6 +14,14 @@ class App extends Component {
     ],
   }
 
+  removeItem = (id) => {
+    const items = this.state.items.filter( items => {
+      if (items.id !== id)
+        return items
+    });
+    this.setState({ items: [...items], });
+  };
+
   getId = () => {
     return Math.floor((1+Math.random()) * 0x10000)
     .toString(16)
@@ -31,7 +39,7 @@ class App extends Component {
         <Header as="h1">Toni's Amazing Grocery List App</Header>
         <br/>
         <ItemForm add={this.addItems} />
-        <List items={this.state.items} />
+        <List items={this.state.items} remove={this.removeItem} />
       </Container>
     );
   }

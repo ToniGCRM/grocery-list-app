@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button, Table, } from "semantic-ui-react";
+import { Table, } from "semantic-ui-react";
 import Items from "../items/Items"
 
-const List = ({ items }) => (
-  <Table celled padded>
+const List = ({ items, remove }) => (
+  <Table celled padded striped columns={4} color="teal" inverted>
     <Table.Header>
       <Table.Row>
         <Table.HeaderCell>Item Name</Table.HeaderCell>
@@ -16,7 +16,7 @@ const List = ({ items }) => (
     <Table.Body>
       {
         items.map( item => (
-          <Items key={item.id} {...item} />
+          <Items key={item.id} {...item} remove={remove}/>
         ))
         
       }
